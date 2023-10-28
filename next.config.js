@@ -69,8 +69,9 @@ function patchWasmModuleImport(config, isServer) {
   config.optimization.moduleIds = 'named';
 
   config.module.rules.push({
-      test: /\.wasm$/,
-      type: 'webassembly/async',
+    test: /\.wasm$/,
+    type: 'webassembly/async',
+    loader: 'wasm-loader',
   });
 
   // TODO: improve this function -> track https://github.com/vercel/next.js/issues/25852
