@@ -4,7 +4,6 @@ const webpack = require('webpack');
 const withPWA = require('next-pwa');
 const runtimeCaching = require('next-pwa/cache');
 require('dotenv').config();
-global.fetch = require('node-fetch');
 
 module.exports = withPWA({
   env: {
