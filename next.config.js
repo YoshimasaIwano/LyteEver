@@ -17,7 +17,6 @@ module.exports = withPWA({
     dest: 'public',
     disable: process.env.NODE_ENV === 'development',
     runtimeCaching,
-    maximumFileSizeToCacheInBytes: 20 * 1024 * 1024,
   },
   ...(process.env.NODE_ENV === 'production' && {
     typescript: {
@@ -64,7 +63,7 @@ module.exports = withPWA({
 
 function patchWasmModuleImport(config, isServer) {
   config.experiments = Object.assign(config.experiments || {}, {
-      asyncWebAssembly: true,
+    asyncWebAssembly: true,
   });
 
   config.optimization.moduleIds = 'named';
@@ -72,14 +71,13 @@ function patchWasmModuleImport(config, isServer) {
   config.module.rules.push({
     test: /\.wasm$/,
     type: 'webassembly/async',
-    loader: 'wasm-loader',
-    exclude: /node_modules/,
   });
 
   // TODO: improve this function -> track https://github.com/vercel/next.js/issues/25852
   if (isServer) {
-      config.output.webassemblyModuleFilename = './../static/wasm/[modulehash].wasm';
+    config.output.webassemblyModuleFilename =
+      './../static/wasm/[modulehash].wasm';
   } else {
-      config.output.webassemblyModuleFilename = 'static/wasm/[modulehash].wasm';
+    config.output.webassemblyModuleFilename = 'static/wasm/[modulehash].wasm';
   }
 }

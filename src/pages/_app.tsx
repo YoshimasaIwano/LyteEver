@@ -16,11 +16,6 @@ import { DecryptPermission } from '@demox-labs/aleo-wallet-adapter-base';
 import { WalletProvider } from '@demox-labs/aleo-wallet-adapter-react';
 import { WalletModalProvider } from '@demox-labs/aleo-wallet-adapter-reactui';
 
-// 
-if (typeof global !== 'undefined') {
-  global.fetch = require('node-fetch');
-}
-
 
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
