@@ -27,7 +27,7 @@ module.exports = withPWA({
       ignoreDuringBuilds: true,
     },
   }),
-  webpack5: true,
+  webpack5: false,
   webpack: (
     config,
     options,
