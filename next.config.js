@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const withPWA = require('next-pwa');
 const runtimeCaching = require('next-pwa/cache');
 require('dotenv').config();
+const WebAssemblyPlugin = require('webpack/lib/WebAssemblyPlugin');
 
 module.exports = withPWA({
   env: {
@@ -74,6 +75,8 @@ function patchWasmModuleImport(config, isServer) {
     loader: 'wasm-loader',
     exclude: /node_modules/,
   });
+
+  config.plugins.push(new WebAssemblyPlugin(options));
 
   // TODO: improve this function -> track https://github.com/vercel/next.js/issues/25852
   if (isServer) {
