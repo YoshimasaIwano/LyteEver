@@ -28,12 +28,18 @@ module.exports = withPWA({
     },
   }),
   webpack5: true,
-  webpack: (config, options) => {
+  webpack: (
+    config,
+    options,
+    { buildId, dev, isServer, defaultLoaders, webpack }
+  ) => {
     config.ignoreWarnings = [/Failed to parse source map/];
     const fallback = config.resolve.fallback || {};
     Object.assign(fallback, {
       stream: require.resolve('stream-browserify'),
       fs: require.resolve('browserify-fs'),
+      buffer: require.resolve('buffer/'),
+      process: require.resolve('process/browser'),
     });
     config.resolve.fallback = fallback;
     config.plugins = (config.plugins || []).concat([
