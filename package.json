@@ -52,6 +52,7 @@
     "next-sitemap": "3.0.5",
     "next-themes": "0.2.0",
     "next-transpile-modules": "^9.1.0",
+    "node-fetch": "^3.3.2",
     "os-browserify": "^0.3.0",
     "overlayscrollbars": "1.13.2",
     "overlayscrollbars-react": "0.3.0",
