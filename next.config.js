@@ -27,23 +27,15 @@ module.exports = withPWA({
       ignoreDuringBuilds: true,
     },
   }),
-  webpack5: false,
-  webpack: (
-    config,
-    options,
-  ) => {
+  webpack5: true,
+  webpack: (config, options) => {
     config.ignoreWarnings = [/Failed to parse source map/];
-    config.resolve.fallback = {
-      ...config.resolve.fallback,
-      fs: false, // This means: Do not try to polyfill
-      net: false,
-      tls: false,
-      child_process: false,
-      http: require.resolve('stream-http'),
-      https: require.resolve('https-browserify'),
-      buffer: require.resolve('buffer/'),
+    const fallback = config.resolve.fallback || {};
+    Object.assign(fallback, {
       stream: require.resolve('stream-browserify'),
-    };
+      fs: require.resolve('browserify-fs'),
+    });
+    config.resolve.fallback = fallback;
     config.plugins = (config.plugins || []).concat([
       new webpack.ProvidePlugin({
         process: 'process/browser',
