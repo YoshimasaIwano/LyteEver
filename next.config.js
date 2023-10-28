@@ -18,6 +18,7 @@ module.exports = withPWA({
     dest: 'public',
     disable: process.env.NODE_ENV === 'development',
     runtimeCaching,
+    maximumFileSizeToCacheInBytes: 20 * 1024 * 1024,
   },
   ...(process.env.NODE_ENV === 'production' && {
     typescript: {
@@ -54,7 +55,7 @@ module.exports = withPWA({
       react$: require.resolve('react'),
     });
     config.resolve.alias = alias;
-    
+
     // Handle nextjs bug with wasm static files
     patchWasmModuleImport(config, options.isServer);
 
