@@ -72,6 +72,7 @@ function patchWasmModuleImport(config, isServer) {
     test: /\.wasm$/,
     type: 'webassembly/async',
     loader: 'wasm-loader',
+    exclude: /node_modules/,
   });
 
   // TODO: improve this function -> track https://github.com/vercel/next.js/issues/25852
