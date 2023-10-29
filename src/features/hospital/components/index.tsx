@@ -16,6 +16,7 @@ export const Index: React.FC = () => {
     medHistory: "",
   });
   const auth = useAuthContext();
+  console.log(auth?.user);
   const isConnected = auth?.user !== undefined;
 
   const mutation = useConversion();
