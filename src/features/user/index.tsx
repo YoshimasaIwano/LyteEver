@@ -30,6 +30,9 @@ const Index = () => {
         className="mt-2 w-1/2 rounded-md bg-slate-100"
         style={{ maxHeight: "300px", overflowY: "scroll" }}
       >
+        <div className="text-center font-bold">
+          Connect to Wallet to view your medical records
+        </div>
         <ul>
           {records.map((record, index) => (
             <li key={index} className="border-4 p-4">
