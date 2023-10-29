@@ -6,7 +6,15 @@ import { useAuthContext } from "@/hooks/useAuthContext";
 
 const Index = () => {
   const [nftTicket, setNftTicket] = useState("");
-  const [records, setRecords] = useState<Record[]>([]);
+  const [records, setRecords] = useState<Record[]>([
+    {
+      name: "yoshi",
+      id: "1234",
+      dateOfbirth: "11/23/1999",
+      countryOfbirth: "Japan",
+      medHistory: "covid-19 vaccine 10/11/21, flu vaccine 11/1/23",
+    }
+  ]);
   const auth = useAuthContext();
   const isConnected = auth?.user !== undefined;
 
