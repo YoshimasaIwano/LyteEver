@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Record } from "@/types";
 import { useAuthContext } from "@/hooks/useAuthContext";
+import forge from "node-forge";
 
 const Index = () => {
   const [nftTicket, setNftTicket] = useState("");
@@ -9,25 +10,38 @@ const Index = () => {
   const isConnected = auth?.user !== undefined;
 
   const fetchRecords = () => {
-    console.log("Fetching records for NFT ticket:", nftTicket);
-    setRecords([
-      {
-        tokenid: "1",
-        name: "John Doe",
-        id: "1234",
-        dateOfbirth: "01/01/1990",
-        countryOfbirth: "USA",
-        medHistory: "Flu, COVID-19 Vaccine",
-      },
-      {
-        tokenid: "2",
-        name: "Jane Smith",
-        id: "5678",
-        dateOfbirth: "05/12/1985",
-        countryOfbirth: "Canada",
-        medHistory: "Chickenpox, Flu Vaccine",
-      },
-    ]);
+    // console.log("Fetching records for NFT ticket:", nftTicket);
+    // setRecords([
+    //   {
+    //     tokenid: "1",
+    //     name: "John Doe",
+    //     id: "1234",
+    //     dateOfbirth: "01/01/1990",
+    //     countryOfbirth: "USA",
+    //     medHistory: "Flu, COVID-19 Vaccine",
+    //   },
+    //   {
+    //     tokenid: "2",
+    //     name: "Jane Smith",
+    //     id: "5678",
+    //     dateOfbirth: "05/12/1985",
+    //     countryOfbirth: "Canada",
+    //     medHistory: "Chickenpox, Flu Vaccine",
+    //   },
+    // ]);
+    const privateKey = localStorage.getItem("privateKey");
+    if (!privateKey) {
+      console.log("Private Key not found. No medical Records available yet");
+      return;
+    }
+    const encryptedBytes = forge.util.decode64(nftTicket);
+    const decrypted = forge.pki.privateKeyFromPem(privateKey);
+    const decryptedBuffer = decrypted.decrypt(encryptedBytes);
+    const decryptedString = forge.util.decodeUtf8(decryptedBuffer);
+
+    const decryptedRecord = JSON.parse(decryptedString);
+    setRecords(decryptedRecord);
+
   };
 
   return (
