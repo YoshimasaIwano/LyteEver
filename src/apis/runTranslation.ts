@@ -23,7 +23,7 @@ export async function runTranslation({
         type: 'object',
         properties: {
           text: { type: 'string', description: 'The text to be translated' },
-          targetLanguage: {
+          targetLanguage: { b    n     
             type: 'string',
             description: 'The target language for translation',
           },

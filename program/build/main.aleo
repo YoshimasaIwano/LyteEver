@@ -22,7 +22,7 @@ record NFT_mint:
     owner as address.private;
     amount as u8.private;
 
-record NFT_claim:
+record NFT_claim:   
     owner as address.private;
     claim as field.private;
 
@@ -30,7 +30,7 @@ record NFT_ownership:
     owner as address.private;
     nft_owner as address.private;
     data as TokenId.private;
-    edition as scalar.private;
+    edition as scalar.private;  
 
 
 mapping nft_owners:
@@ -45,7 +45,7 @@ mapping general_settings:
 
 mapping nfts_to_mint:
 	key as u128.public;
-	value as field.public;
+	value as field.public;commit.
 
 
 mapping claims_to_nfts:

@@ -63,7 +63,7 @@ function initialize_collection:
     input r0 as u128.public;
     input r1 as u128.public;
     input r2 as BaseURI.public;
-    assert.eq self.caller aleo1uran94ddjnvdr0neh8d0mzxuvv77pyprnp7jmzpkuh7950t46qyqnsadey;
+    assert.eq self.caller aleo1xyvqs9smfj5k20wc2tz2gd008yx9kz5zr47t7ns8natqr0vdtvzq8sua3j;
     async initialize_collection r0 r1 r2 into r3;
     output r3 as privacy_pride_nft_test13.aleo/initialize_collection.future;
 
@@ -88,7 +88,7 @@ finalize initialize_collection:
 function add_nft:
     input r0 as TokenId.public;
     input r1 as scalar.public;
-    assert.eq self.caller aleo1uran94ddjnvdr0neh8d0mzxuvv77pyprnp7jmzpkuh7950t46qyqnsadey;
+    assert.eq self.caller aleo1xyvqs9smfj5k20wc2tz2gd008yx9kz5zr47t7ns8natqr0vdtvzq8sua3j;
     hash.bhp256 r0 into r2 as field;
     commit.bhp256 r2 r1 into r3 as field;
     async add_nft r3 into r4;
@@ -111,7 +111,7 @@ finalize add_nft:
 function add_minter:
     input r0 as address.private;
     input r1 as u8.public;
-    assert.eq self.caller aleo1uran94ddjnvdr0neh8d0mzxuvv77pyprnp7jmzpkuh7950t46qyqnsadey;
+    assert.eq self.caller aleo1xyvqs9smfj5k20wc2tz2gd008yx9kz5zr47t7ns8natqr0vdtvzq8sua3j;
     cast r0 r1 into r2 as NFT_mint.record;
     async add_minter into r3;
     output r2 as NFT_mint.record;
@@ -125,7 +125,7 @@ finalize add_minter:
 
 function update_toggle_settings:
     input r0 as u32.public;
-    assert.eq self.caller aleo1uran94ddjnvdr0neh8d0mzxuvv77pyprnp7jmzpkuh7950t46qyqnsadey;
+    assert.eq self.caller aleo1xyvqs9smfj5k20wc2tz2gd008yx9kz5zr47t7ns8natqr0vdtvzq8sua3j;
     async update_toggle_settings r0 into r1;
     output r1 as privacy_pride_nft_test13.aleo/update_toggle_settings.future;
 
@@ -141,7 +141,7 @@ finalize update_toggle_settings:
 
 function set_mint_block:
     input r0 as u32.public;
-    assert.eq self.caller aleo1uran94ddjnvdr0neh8d0mzxuvv77pyprnp7jmzpkuh7950t46qyqnsadey;
+    assert.eq self.caller aleo1xyvqs9smfj5k20wc2tz2gd008yx9kz5zr47t7ns8natqr0vdtvzq8sua3j;
     async set_mint_block r0 into r1;
     output r1 as privacy_pride_nft_test13.aleo/set_mint_block.future;
 
@@ -155,7 +155,7 @@ finalize set_mint_block:
 
 function update_symbol:
     input r0 as u128.public;
-    assert.eq self.caller aleo1uran94ddjnvdr0neh8d0mzxuvv77pyprnp7jmzpkuh7950t46qyqnsadey;
+    assert.eq self.caller aleo1xyvqs9smfj5k20wc2tz2gd008yx9kz5zr47t7ns8natqr0vdtvzq8sua3j;
     async update_symbol r0 into r1;
     output r1 as privacy_pride_nft_test13.aleo/update_symbol.future;
 
@@ -169,7 +169,7 @@ finalize update_symbol:
 
 function update_base_uri:
     input r0 as BaseURI.public;
-    assert.eq self.caller aleo1uran94ddjnvdr0neh8d0mzxuvv77pyprnp7jmzpkuh7950t46qyqnsadey;
+    assert.eq self.caller aleo1xyvqs9smfj5k20wc2tz2gd008yx9kz5zr47t7ns8natqr0vdtvzq8sua3j;
     async update_base_uri r0 into r1;
     output r1 as privacy_pride_nft_test13.aleo/update_base_uri.future;
 
