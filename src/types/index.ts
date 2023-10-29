@@ -1,5 +1,5 @@
 export type Record = {
-  tokenid: string;
+  tokenid?: string;
   name: string;
   id: string;
   dateOfbirth: string;
