@@ -18,7 +18,7 @@ export const Index = () => {
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center ">
-      <div className="w-1/2 flex flex-wrap justify-between p-2 rounded-md">
+      <div className="lg:w-2/3 flex flex-wrap justify-between p-2 rounded-md">
         {[
           {
             label: "Token ID (Patient ID)",
@@ -70,11 +70,11 @@ export const Index = () => {
                 medHistory: value,
               })),
             placeholder:
-              "Enter list of known diseases, treatments, and vaccines separated by a comma",
+              "Enter list of known diseases, treatments, and vaccines with dates separated by a comma",
             isTextarea: true, // new property to identify this as a textarea
           },
         ].map((field, idx) => (
-          <div key={idx} className="mb-2 w-1/2 px-2">
+          <div key={idx} className="mb-2 w-full px-2">
             <label
               htmlFor={field.label}
               className="block text-sm font-medium text-gray-700"
@@ -88,7 +88,7 @@ export const Index = () => {
                 onChange={(e) => field.setter(e.target.value)}
                 placeholder={field.placeholder || ""}
                 className="mt-2 w-full p-2 border rounded shadow-sm"
-                rows={4} // or adjust as needed
+                rows={6} // or adjust as needed
               />
             ) : (
               <input
