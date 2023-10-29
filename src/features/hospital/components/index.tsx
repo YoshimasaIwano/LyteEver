@@ -7,15 +7,15 @@ import { useAuthContext } from "@/hooks/useAuthContext";
 
 export const Index: React.FC = () => {
   const [record, setRecord] = useState<Record>({
-    tokenid: "1234",
-    name: "yoshi",
-    id: "12",
-    dateOfbirth: "12/17/1998",
-    countryOfbirth: "Japan",
-    medHistory: "covid-19 2/3/22, flu 2/3/22",
+    tokenid: "",
+    name: "",
+    id: "",
+    dateOfbirth: "",
+    countryOfbirth: "",
+    medHistory: "",
   });
   const auth = useAuthContext();
-  const isConnected = auth?.user !== null;
+  const isConnected = auth?.user !== undefined;
 
   const mutation = useConversion();
   const router = useRouter();

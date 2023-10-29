@@ -6,7 +6,7 @@ const Index = () => {
   const [nftTicket, setNftTicket] = useState("");
   const [records, setRecords] = useState<Record[]>([]);
   const auth = useAuthContext();
-  const isConnected = auth?.user !== null;
+  const isConnected = auth?.user !== undefined;
 
   const fetchRecords = () => {
     console.log("Fetching records for NFT ticket:", nftTicket);
