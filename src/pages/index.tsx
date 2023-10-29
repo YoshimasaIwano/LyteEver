@@ -1,7 +1,7 @@
 // @ts-nocheck
 import Link from "next/link";
 import { Inter } from "next/font/google";
-import EthereumComponent from "@/features/web3/indx";
+import EthereumComponent from "@/features/web3/index";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
