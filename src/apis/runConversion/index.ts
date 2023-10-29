@@ -1,5 +1,5 @@
 // runConversion.ts
-import openai from "@/config/openai";
+import openai from "@/pages/api/openai";
 import { ChatCompletionMessageParam } from "openai/resources/index.mjs";
 
 interface Props {
@@ -9,16 +9,12 @@ interface Props {
 export async function runConversion({
   text,
 }: Props): Promise<ChatCompletionMessageParam> {
-  const messages: ChatCompletionMessageParam[] = [
-    {
-      role: "user",
-      content: `Conversion '${text}' to specific format in json`,
-    },
-  ];
-  const functions = [
-    {
-      name: "conversion_text",
-      description: `conversion a given text to the target json format and return the converted json only. the format is 
+  const response = await openai.chat.completions.create({
+    model: "gpt-4", // Adjust the model as needed
+    messages: [
+      {
+        role: "user",
+        content: `Convert a given ${text} to the target json format. Return only the converted json. the format is 
 {
   "tokenid": "123456",
   "name": "First Last",
@@ -27,41 +23,10 @@ export async function runConversion({
   "countryOfbirth": "U.S.A",
   "medHistory": "Chickenpox 10/23/2024, Flu Vaccine 05/25/2016"
 }`,
-      parameters: {
-        type: "object",
-        properties: {
-          text: { type: "string", description: "The text to be converted" },
-        },
-        required: ["text"],
       },
-    },
-  ];
-
-  const response = await openai.chat.completions.create({
-    model: "gpt-4", // Adjust the model as needed
-    messages: messages,
-    functions: functions,
-    function_call: "auto",
+    ],
+    temperature: 0.1,
   });
-  const responseMessage = response.choices[0].message;
-
-  if (responseMessage.function_call) {
-    const functionName = responseMessage.function_call.name;
-
-    messages.push(responseMessage);
-    messages.push({
-      role: "function",
-      name: functionName,
-      content: JSON.stringify({ text: text }),
-    });
-
-    const secondResponse = await openai.chat.completions.create({
-      model: "gpt-4",
-      messages: messages,
-    });
-
-    return secondResponse.choices[0].message;
-  }
 
   return response.choices[0].message;
 }
