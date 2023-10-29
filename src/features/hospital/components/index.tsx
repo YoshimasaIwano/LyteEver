@@ -3,6 +3,7 @@ import { Record } from "@/types";
 import React from "react";
 import { useConversion } from "@/hooks/useConversion";
 import { useRouter } from "next/router";
+import forge from "node-forge";
 
 export const Index: React.FC = () => {
   const [record, setRecord] = useState<Record>({
@@ -26,7 +27,18 @@ export const Index: React.FC = () => {
       // Check the response if necessary, for example:
       if (response && response.content) {
         // Use the response data to create the NFT
-        const nftResponse = await createNFT(response.content); // Replace with your NFT creation function
+
+        const keypair = forge.pki.rsa.generateKeyPair({bits:2048});
+        const publicKey = forge.pki.publicKeyToPem(keypair.publicKey);
+        const privateKey = forge.pki.privateKeyToPem(keypair.privateKey);
+        
+        localStorage.setItem("privateKey", privateKey);
+        
+        const encrypted = forge.pki.publicKeyFromPem(publicKey);
+        const encryptedBytes = forge.util.encodeUtf8(response.content);
+        const encryptedBuffer= encrypted.encrypt(encryptedBytes);
+        const encryptedString = forge.util.encode64(encryptedBuffer);
+        const nftResponse = await createNFT(encryptedString); // Replace with your NFT creation function
 
         // Check the nftResponse if necessary and decide if you should navigate:
         if (nftResponse && nftResponse.success) {
