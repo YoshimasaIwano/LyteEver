@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import { Record } from "@/types";
-import { useAuthContext } from "@/hooks/useAuthContext";
 import forge from "node-forge";
+import axios from "axios";
+import { useAuthContext } from "@/hooks/useAuthContext";
 
 const Index = () => {
   const [nftTicket, setNftTicket] = useState("");
@@ -10,19 +11,29 @@ const Index = () => {
   const isConnected = auth?.user !== undefined;
 
   useEffect(() => {
-    const privateKey = localStorage.getItem("privateKey");
-    if (!privateKey) {
-      console.log("Private Key not found. No medical Records available yet");
-      return;
+    if (isConnected) {
+      const getNFTTicket = async () => {
+        const response = await axios.get(
+          `https://lyteeverleo.vercel.app/api/mintMRT/${process.env.NEXT_PUBLIC_PUBLIC_KEY}`
+        );
+        setNftTicket(response.data.data.attributes.ticket);
+      };
+      getNFTTicket();
     }
-    const encryptedBytes = forge.util.decode64(nftTicket);
-    const decrypted = forge.pki.privateKeyFromPem(privateKey);
-    const decryptedBuffer = decrypted.decrypt(encryptedBytes);
-    const decryptedString = forge.util.decodeUtf8(decryptedBuffer);
-
-    const decryptedRecord = JSON.parse(decryptedString);
-    setRecords(decryptedRecord);
   }, []);
+
+  useEffect(() => {
+    const privateKey = localStorage.getItem("privateKey");
+    if (privateKey && nftTicket) {
+      const encryptedBytes = forge.util.decode64(nftTicket);
+      const decrypted = forge.pki.privateKeyFromPem(privateKey);
+      const decryptedBuffer = decrypted.decrypt(encryptedBytes);
+      const decryptedString = forge.util.decodeUtf8(decryptedBuffer);
+
+      const decryptedRecord = JSON.parse(decryptedString);
+      setRecords(decryptedRecord);
+    }
+  }, [nftTicket]);
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center">
