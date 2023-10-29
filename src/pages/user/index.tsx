@@ -7,7 +7,7 @@ import { useSnackbar } from "notistack";
 
 const User = () => {
   const auth = useAuthContext();
-  const isConnected = auth?.user !== null;
+  const isConnected = auth?.user !== undefined;
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
