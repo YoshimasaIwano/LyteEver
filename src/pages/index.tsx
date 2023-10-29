@@ -1,10 +1,24 @@
 // @ts-nocheck
 import Link from "next/link";
+import { useEffect } from "react";
 import { Inter } from "next/font/google";
-import EthereumComponent from "@/features/web3/index";
+import { useAuthContext } from "@/hooks/useAuthContext";
+import { useSnackbar } from "notistack";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const auth = useAuthContext();
+  const isConnected = auth?.user !== undefined;
+  const { enqueueSnackbar } = useSnackbar();
+
+  useEffect(() => {
+    if (!isConnected) {
+      enqueueSnackbar("You are not connected to a wallet.", {
+        variant: "warning",
+        autoHideDuration: 5000,
+      });
+    }
+  }, []);
 
   return (
     <main
@@ -15,8 +29,6 @@ export default function Home() {
           Welcome to the Main Application
         </h1>
       </header>
-
-      <EthereumComponent />
 
       <section className="mb-32 grid gap-8 justify-items-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-2 lg:text-left">
         <Link href="/user">
