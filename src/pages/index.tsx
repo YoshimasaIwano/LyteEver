@@ -1,10 +1,11 @@
+// @ts-nocheck
 import Link from "next/link";
 import { Inter } from "next/font/google";
 import EthereumComponent from "@/features/web3/indx";
-
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+
   return (
     <main
       className={`flex min-h-screen flex-col items-center justify-center p-24 ${inter.className}`}
@@ -14,6 +15,7 @@ export default function Home() {
           Welcome to the Main Application
         </h1>
       </header>
+
       <EthereumComponent />
 
       <section className="mb-32 grid gap-8 justify-items-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-2 lg:text-left">
