@@ -8,12 +8,13 @@ const Index = () => {
   const [nftTicket, setNftTicket] = useState("");
   const [records, setRecords] = useState<Record[]>([
     {
+      tokenid: "0",
       name: "yoshi",
       id: "1234",
       dateOfbirth: "11/23/1999",
       countryOfbirth: "Japan",
       medHistory: "covid-19 vaccine 10/11/21, flu vaccine 11/1/23",
-    }
+    },
   ]);
   const auth = useAuthContext();
   const isConnected = auth?.user !== undefined;
@@ -49,9 +50,12 @@ const Index = () => {
         className="mt-2 w-1/2 rounded-md bg-slate-100"
         style={{ maxHeight: "300px", overflowY: "scroll" }}
       >
-        <div className="text-center font-bold">
-          No records yet. Please create one.
-        </div>
+        {records.length == 0 && (
+          <div className="text-center font-bold">
+            No records yet. Please create one.
+          </div>
+        )}
+
         <ul>
           {records.map((record, index) => (
             <li key={index} className="border-4 p-4">
