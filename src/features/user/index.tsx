@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { Record } from "@/types";
+import { useAuthContext } from "@/hooks/useAuthContext";
 
 const Index = () => {
   const [nftTicket, setNftTicket] = useState("");
   const [records, setRecords] = useState<Record[]>([]);
+  const auth = useAuthContext();
+  const isConnected = auth?.user !== null;
 
   const fetchRecords = () => {
     console.log("Fetching records for NFT ticket:", nftTicket);
@@ -46,6 +49,7 @@ const Index = () => {
       </div>
 
       <button
+        disabled={!isConnected}
         onClick={fetchRecords}
         className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-blue-500 "
       >

@@ -3,6 +3,7 @@ import { Record } from "@/types";
 import React from "react";
 import { useConversion } from "@/hooks/useConversion";
 import { useRouter } from "next/router";
+import { useAuthContext } from "@/hooks/useAuthContext";
 
 export const Index: React.FC = () => {
   const [record, setRecord] = useState<Record>({
@@ -13,6 +14,8 @@ export const Index: React.FC = () => {
     countryOfbirth: "Japan",
     medHistory: "covid-19 2/3/22, flu 2/3/22",
   });
+  const auth = useAuthContext();
+  const isConnected = auth?.user !== null;
 
   const mutation = useConversion();
   const router = useRouter();
@@ -138,6 +141,7 @@ export const Index: React.FC = () => {
         ))}
       </div>
       <button
+        disabled={!isConnected}
         onClick={handleSubmitRecord}
         className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-2 rounded mt-4"
       >
