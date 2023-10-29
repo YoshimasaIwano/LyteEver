@@ -16,6 +16,7 @@ const config: Config = {
       },
       backgroundColor: {
         "btn-bg-pale-blue-10": "#EAF4FF",
+        "record-bg-white-10": "#F8F8F8",
       }
     },
   },

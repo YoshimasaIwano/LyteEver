@@ -1,22 +1,35 @@
-// pages/user/index.tsx
-
 import { useState } from "react";
+import { Record } from "@/types";
 
 const Index = () => {
   const [nftTicket, setNftTicket] = useState("");
-  const [records, setRecords] = useState<string[]>([]);
+  const [records, setRecords] = useState<Record[]>([]);
 
   const fetchRecords = () => {
     console.log("Fetching records for NFT ticket:", nftTicket);
-
-    // Here, you would typically fetch the records associated with the NFT ticket.
-    // For demonstration purposes, we'll just use a static example.
-    setRecords(["Record 1 for NFT", "Record 2 for NFT"]);
+    setRecords([
+      {
+        tokenid: "1",
+        name: "John Doe",
+        id: "1234",
+        dateOfbirth: "01/01/1990",
+        countryOfbirth: "USA",
+        medHistory: "Flu, COVID-19 Vaccine",
+      },
+      {
+        tokenid: "2",
+        name: "Jane Smith",
+        id: "5678",
+        dateOfbirth: "05/12/1985",
+        countryOfbirth: "Canada",
+        medHistory: "Chickenpox, Flu Vaccine",
+      },
+    ]);
   };
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center">
-      <div className="flex flex-col items-center justify-center p-4">
+      <div className="flex w-1/2 flex-col items-center justify-center p-4">
         <label
           htmlFor="nftTicket"
           className="block text-sm font-medium text-gray-700"
@@ -24,7 +37,7 @@ const Index = () => {
           Enter NFT Ticket
         </label>
         <input
-        type="text"
+          type="text"
           id="nftTicket"
           value={nftTicket}
           onChange={(e) => setNftTicket(e.target.value)}
@@ -34,16 +47,44 @@ const Index = () => {
 
       <button
         onClick={fetchRecords}
-        className="px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-blue-500 "
+        className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-blue-500 "
       >
         Show Records
       </button>
 
-      <div className="py-1">
+      <div
+        className="mt-2 w-1/2 rounded-md bg-slate-100"
+        style={{ maxHeight: "300px", overflowY: "scroll" }}
+      >
         <ul>
           {records.map((record, index) => (
-            <li key={index} className="border-b py-1">
-              {record}
+            <li key={index} className="border-4 p-4">
+              <div className="flex flex-col space-y-2">
+                <div className="flex justify-between">
+                  <span className="font-semibold">Token ID:</span>
+                  <span>{record.tokenid}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="font-semibold">Name:</span>
+                  <span>{record.name}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="font-semibold">ID:</span>
+                  <span>{record.id}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="font-semibold">Date of Birth:</span>
+                  <span>{record.dateOfbirth}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="font-semibold">Country of Birth:</span>
+                  <span>{record.countryOfbirth}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="font-semibold">Medical History:</span>
+                  <span>{record.medHistory}</span>
+                </div>
+              </div>
             </li>
           ))}
         </ul>

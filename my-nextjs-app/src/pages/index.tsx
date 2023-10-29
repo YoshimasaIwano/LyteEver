@@ -9,7 +9,7 @@ export default function Home() {
       className={`flex min-h-screen flex-col items-center justify-center p-24 ${inter.className}`}
     >
       <header>
-        <h1 className="text-4xl mb-8 font-bold">
+        <h1 className="text-4xl mb-8 font-bold text-center">
           Welcome to the Main Application
         </h1>
       </header>
