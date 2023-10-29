@@ -25,7 +25,7 @@ export async function runConversion({
   "id": "78910",
   "dateOfbirth": "12/17/2023",
   "countryOfbirth": "U.S.A",
-  "medHistory": "Chickenpox, Flu Vaccine"
+  "medHistory": "Chickenpox 10/23/2024, Flu Vaccine 05/25/2016"
 }`,
       parameters: {
         type: "object",
