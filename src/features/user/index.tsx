@@ -42,7 +42,7 @@ const Index = () => {
         style={{ maxHeight: "300px", overflowY: "scroll" }}
       >
         <div className="text-center font-bold">
-          Connect to Wallet to view your medical records
+          No records yet. Please create one.
         </div>
         <ul>
           {records.map((record, index) => (
