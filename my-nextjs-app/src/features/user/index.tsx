@@ -15,31 +15,31 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 ">
-      <div className="flex flex-col items-center justify-center">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center p-4">
         <label
           htmlFor="nftTicket"
           className="block text-sm font-medium text-gray-700"
         >
           Enter NFT Ticket
         </label>
-        <textarea
+        <input
+        type="text"
           id="nftTicket"
           value={nftTicket}
           onChange={(e) => setNftTicket(e.target.value)}
-          rows={4}
           className="mt-1 block w-full p-2 border rounded-md"
         />
       </div>
 
       <button
         onClick={fetchRecords}
-        className="w-full p-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+        className="px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-blue-500 "
       >
         Show Records
       </button>
 
-      <div>
+      <div className="py-1">
         <ul>
           {records.map((record, index) => (
             <li key={index} className="border-b py-1">

@@ -9,8 +9,8 @@ export const Index = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 ">
-      <div className="flex flex-col items-center text-center p-4 rounded-md">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center ">
+      <div className="flex w-1/2 flex-col items-center text-center p-4 rounded-md">
         <label
           htmlFor="address"
           className="block text-sm font-medium text-gray-700"
@@ -22,21 +22,17 @@ export const Index = () => {
           id="address"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
-          className="mt-2 w-2/3 p-2 border rounded-md shadow-sm"
+          className="mt-2 w-full p-2 border rounded shadow-sm"
         />
       </div>
-
-      <div className="w-2/3 p-2 rounded-full bg-gradient-to-r from-gray-200 to-gray-300">
-        <button
-          onClick={createNFT}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Create NFT
-        </button>
-      </div>
+      <button
+        onClick={createNFT}
+        className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 rounded"
+      >
+        Create NFT
+      </button>
     </div>
   );
 };
-
 
 export default Index;
