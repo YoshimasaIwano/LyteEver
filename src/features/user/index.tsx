@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Record } from "@/types";
 import { useAuthContext } from "@/hooks/useAuthContext";
 import forge from "node-forge";
@@ -9,26 +9,7 @@ const Index = () => {
   const auth = useAuthContext();
   const isConnected = auth?.user !== undefined;
 
-  const fetchRecords = () => {
-    // console.log("Fetching records for NFT ticket:", nftTicket);
-    // setRecords([
-    //   {
-    //     tokenid: "1",
-    //     name: "John Doe",
-    //     id: "1234",
-    //     dateOfbirth: "01/01/1990",
-    //     countryOfbirth: "USA",
-    //     medHistory: "Flu, COVID-19 Vaccine",
-    //   },
-    //   {
-    //     tokenid: "2",
-    //     name: "Jane Smith",
-    //     id: "5678",
-    //     dateOfbirth: "05/12/1985",
-    //     countryOfbirth: "Canada",
-    //     medHistory: "Chickenpox, Flu Vaccine",
-    //   },
-    // ]);
+  useEffect(() => {
     const privateKey = localStorage.getItem("privateKey");
     if (!privateKey) {
       console.log("Private Key not found. No medical Records available yet");
@@ -41,35 +22,10 @@ const Index = () => {
 
     const decryptedRecord = JSON.parse(decryptedString);
     setRecords(decryptedRecord);
-
-  };
+  }, []);
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center">
-      <div className="flex w-1/2 flex-col items-center justify-center p-4">
-        <label
-          htmlFor="nftTicket"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Enter NFT Ticket
-        </label>
-        <input
-          type="text"
-          id="nftTicket"
-          value={nftTicket}
-          onChange={(e) => setNftTicket(e.target.value)}
-          className="mt-1 block w-full p-2 border rounded-md"
-        />
-      </div>
-
-      <button
-        disabled={!isConnected}
-        onClick={fetchRecords}
-        className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-blue-500 "
-      >
-        Show Records
-      </button>
-
       <div
         className="mt-2 w-1/2 rounded-md bg-slate-100"
         style={{ maxHeight: "300px", overflowY: "scroll" }}
