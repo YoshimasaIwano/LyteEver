@@ -26,7 +26,7 @@ export default function Home() {
     >
       <header>
         <h1 className="text-4xl mb-8 font-bold text-center">
-          Welcome to the Main Application
+          Welcome to Med Chain
         </h1>
       </header>
 

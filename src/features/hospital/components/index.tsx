@@ -5,6 +5,7 @@ import { useConversion } from "@/hooks/useConversion";
 import { useRouter } from "next/router";
 import { useAuthContext } from "@/hooks/useAuthContext";
 import forge from "node-forge";
+import axios from "axios";
 
 export const Index: React.FC = () => {
   const [record, setRecord] = useState<Record>({
@@ -31,15 +32,15 @@ export const Index: React.FC = () => {
       if (response && response.content) {
         // Use the response data to create the NFT
 
-        const keypair = forge.pki.rsa.generateKeyPair({bits:2048});
+        const keypair = forge.pki.rsa.generateKeyPair({ bits: 2048 });
         const publicKey = forge.pki.publicKeyToPem(keypair.publicKey);
         const privateKey = forge.pki.privateKeyToPem(keypair.privateKey);
-        
+
         localStorage.setItem("privateKey", privateKey);
-        
+
         const encrypted = forge.pki.publicKeyFromPem(publicKey);
         const encryptedBytes = forge.util.encodeUtf8(response.content);
-        const encryptedBuffer= encrypted.encrypt(encryptedBytes);
+        const encryptedBuffer = encrypted.encrypt(encryptedBytes);
         const encryptedString = forge.util.encode64(encryptedBuffer);
         const nftResponse = await createNFT(encryptedString); // Replace with your NFT creation function
 
@@ -50,7 +51,6 @@ export const Index: React.FC = () => {
           router.push("/");
         } else {
           // Handle NFT creation error
-
         }
       }
     } catch (error) {
@@ -60,10 +60,16 @@ export const Index: React.FC = () => {
 
   const createNFT = async (data: string) => {
     // Replace with your NFT creation function
-    return { success: true };
-  }
-
-
+    const response = await axios.post(
+      `https://lyteeverleo.vercel.app/api/mintHT/${process.env.NEXT_PUBLIC_PUBLIC_KEY}`,
+      { data }
+    );
+    if (response.status === 200) {
+      return { success: true };
+    } else {
+      return { success: false };
+    }
+  };
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center ">
