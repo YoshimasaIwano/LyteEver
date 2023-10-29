@@ -9,7 +9,6 @@ import axios from "axios";
 
 export const Index: React.FC = () => {
   const [record, setRecord] = useState<Record>({
-    tokenid: "",
     name: "",
     id: "",
     dateOfbirth: "",
@@ -75,13 +74,6 @@ export const Index: React.FC = () => {
     <div className="min-h-screen w-full flex flex-col items-center justify-center ">
       <div className="lg:w-2/3 flex flex-wrap justify-between p-2 rounded-md">
         {[
-          {
-            label: "Token ID (Patient ID)",
-            value: record.tokenid,
-            setter: (value: string) =>
-              setRecord((prev) => ({ ...prev, tokenid: value })),
-            placeholder: "e.g.) 1234",
-          },
           {
             label: "Name",
             value: record.name,
