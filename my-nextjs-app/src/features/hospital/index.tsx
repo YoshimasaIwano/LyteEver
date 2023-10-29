@@ -9,7 +9,7 @@ export const Index = () => {
   };
 
   return (
-    <div className="flex flex-col items-center space-y-4">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 ">
       <div className="flex flex-col items-center text-center p-4 rounded-md">
         <label
           htmlFor="address"
@@ -29,7 +29,7 @@ export const Index = () => {
       <div className="w-2/3 p-2 rounded-full bg-gradient-to-r from-gray-200 to-gray-300">
         <button
           onClick={createNFT}
-          className="w-full p-4 bg-purple-500 text-white font-semibold rounded-md transition duration-300 ease-in-out hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
           Create NFT
         </button>
